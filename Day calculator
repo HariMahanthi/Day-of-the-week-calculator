@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+const char* x(int day, int month, int year) {
+    
+    if (month < 3) {
+        month += 12;
+        year--;
+    }
+
+    int k = year % 100;   
+    int j = year / 100;   
+
+
+    int h = (day + (13 * (month + 1)) / 5 + k + k / 4 + j / 4 + 5 * j) % 7;
+
+    
+    switch (h) {
+        case 0: return "Saturday";
+        case 1: return "Sunday";
+        case 2: return "Monday";
+        case 3: return "Tuesday";
+        case 4: return "Wednesday";
+        case 5: return "Thursday";
+        case 6: return "Friday";
+        default: return "Error";
+    }
+}
+
+int main() {
+    int day, month, year;
+
+
+    printf("Enter date (dd mm yyyy): ");
+    scanf("%d %d %d", &day, &month, &year);
+
+
+    if (day < 1 || month < 1 || month > 12 || year < 0) {
+        printf("Invalid date input.\n");
+        return 1;
+    }
+
+
+    printf("The day of the week is: %s\n", x(day, month, year));
+
+    return 0;
+}
